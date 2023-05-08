@@ -1,3 +1,4 @@
+
 from pytube import YouTube
 from pydub import AudioSegment
 import ssl
@@ -8,15 +9,14 @@ link = str(input('Enter Youtube Video URL :: '))
 # resolution = str(input('Resolution ex: 720p, 1080p :: '))
 formatOfVid = str(input('Format mp3/mp4 :: ')).lower()
 yt = YouTube(link)
+# print(pytube.__version__)
 
-stream = yt.streams.get_highest_resolution()
-# print(yt.streams)
-video_file = stream.download(output_path="/Users/macintoshhd/Downloads",filename=yt.title+".mp4")
+# stream = yt.streams.get_highest_resolution()
+# print(yt.title.capitalize)
+video_file = yt.streams.get_highest_resolution().download(output_path="/Users/macintoshhd/Downloads",filename=yt.title+".mp4")
 
 if formatOfVid == 'mp3':
     audio = AudioSegment.from_file(video_file, format="mp4")
     audio.export("/Users/macintoshhd/Downloads/"+yt.title+".mp3", format="mp3")
     os.remove(video_file)
-else :
-    print('Audio export failed')
     
