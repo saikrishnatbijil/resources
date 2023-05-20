@@ -1,6 +1,6 @@
 from hashlib import sha256
 
-MAX_NONCE = 10000000
+MAX_NONCE = 100000000
 
 def hash(text):
     return sha256(text.encode('ascii')).hexdigest()
@@ -24,6 +24,6 @@ transactions = '''
 Saikrishna -> Sai -> 100
 Sai -> Krishna -> 200
 '''
-difficulty = 10
+difficulty = 7
 new_hash = mine(2,transactions, hash('saikrishna'),difficulty)
 print(new_hash)
