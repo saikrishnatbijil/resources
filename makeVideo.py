@@ -1,4 +1,4 @@
-from moviepy.editor import TextClip,ImageClip, CompositeVideoClip, CompositeAudioClip, VideoFileClip, AudioFileClip, concatenate_videoclips
+from moviepy.editor import TextClip,ImageClip, CompositeVideoClip, CompositeAudioClip, VideoFileClip, AudioFileClip, concatenate_videoclips, vfx
 
 def resize_video(clip, output_path, new_width, new_height, image_path, text):
     # Load the video clip
@@ -43,18 +43,18 @@ def resize_video(clip, output_path, new_width, new_height, image_path, text):
     credits_text.close()
     final_clip.close()
 
-background_clip = VideoFileClip("background.mov").subclip(0, 5).without_audio()
-background_clip2 = VideoFileClip("background.mov").subclip(30, 35).without_audio()
-background_clip3 = VideoFileClip("second.mov").subclip(5, 10).without_audio()
-background_clip4 = VideoFileClip("background.mov").subclip(40, 45).without_audio()
-background_clip5 = VideoFileClip("background.mov").subclip(20, 25).without_audio()
-background_clip6 = VideoFileClip("second.mov").subclip(0, 5).without_audio()
-background_clip7 = VideoFileClip("background.mov").subclip(10, 15).without_audio()
-background_clip8 = VideoFileClip("second.mov").subclip(4, 15).without_audio()
+background_clip = VideoFileClip("background.mov").subclip(0, 3).without_audio()
+background_clip2 = VideoFileClip("background.mov").subclip(3, 6).without_audio()
+background_clip3 = VideoFileClip("second.mov").subclip(6, 9).without_audio()
+background_clip4 = VideoFileClip("background.mov").subclip(9, 12).without_audio()
+background_clip5 = VideoFileClip("second.mov").subclip(0, 3).without_audio()
+background_clip6 = VideoFileClip("background.mov").subclip(20, 21).without_audio()
+# background_clip7 = VideoFileClip("background.mov").subclip(15, 20).without_audio()
+# background_clip8 = VideoFileClip("second.mp4").subclip(4, 15).without_audio()
 
 
-audio = AudioFileClip("audio.mp3")
-combined =  concatenate_videoclips([background_clip, background_clip2, background_clip3, background_clip4, background_clip5, background_clip6, background_clip7])
+audio = AudioFileClip("audio.mp3").fx(vfx.speedx, 1)
+combined =  concatenate_videoclips([background_clip, background_clip2, background_clip3, background_clip4, background_clip5, background_clip6])
 # combined =  concatenate_videoclips([background_clip])
 
 combined = combined.set_audio(CompositeAudioClip([audio]))
@@ -66,6 +66,6 @@ output_path = 'output_video.mp4'
 new_width = 1080
 new_height = 1920
 image_path = 'heading.png'
-text = 'Credits: Google, Unbox Therapy'
+text = 'Credits: Mrwhosetheboss'
 
 resize_video(combined, output_path, new_width, new_height, image_path, text)
